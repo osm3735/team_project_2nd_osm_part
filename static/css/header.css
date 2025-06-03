@@ -1,0 +1,19 @@
+  header {
+      background-color: #2d4739;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+  }
+
+  nav a.active {
+      font-weight: bold;
+      text-decoration: underline;
+  }

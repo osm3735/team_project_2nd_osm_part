@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매장 검색 및 주소 찾기</title>
+
+    <link rel="stylesheet" href="../static/css/common.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/find_store.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+
+</head>
+
+<body>
+    <header class="site-header">
+        <h1><img src="./img/K-038.png"> 이른 아침</h1>
+        <nav>
+            <a href="./07_teamproj_index.html">홈</a>
+            <a href="./07_teamproj_submenu.html">메뉴</a>
+            <a href="./07_teamproj_findstore.html" class="active">매장 찾기</a>
+            <a href="./07_teamproj_board.html">자유 게시판</a>
+        </nav>
+        <nav>
+            <a href="./07_teamproj_login.html">로그인</a>
+            <a href="./07_teamproj_join_page.html">회원 가입</a>
+            <a href="./07_teamproj_dlivery.html">배송현황</a>
+            <a href="./07_teamproj_order_tracking.html">주문조회</a>
+            <span class="cart-icon">장바구니🛒<span class="cart-count">0</span></span>
+        </nav>
+    </header>
+    <main class="container">
+        <h1 style=" margin-left:150px;" color="#2d4739"> 매장 찾기</h1>
+        <div class="search-box">
+            <select name="" id="">
+                <option value="1">지점명</option>
+                <option value="2">위치</option>
+            </select>
+            <input type="text" id="address-input" placeholder="위치나 키워드를 입력하세요">
+            <button id="search-btn">검색</button>
+        </div>
+        <div id="map">
+            <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+            <script src="../static/js/map.js"></script>
+        </div>
+        <ul id="store-list" style="margin-left: 600px; margin-top: 20px;">
+
+        </ul>
+    </main>
+    <footer>
+        &copy; 2025 수제커피브루 | 경기도 커피시 향기구 아라비카로 100
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+.item_view {
+    display: flex;
+    flex-direction: row;
+}
+
+.item_img_main {
+    width: 700px;
+    height: 600px;
+}
+
+.item_img_main img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.item_img_selector {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 8px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.item_img_selector {
+    width: 700px;
+    height: 100px;
+}
+
+.item_img_selector img {
+    flex-shrink: 0;
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    /* 왼쪽 라벨, 오른쪽 값 */
+    gap: 10px;
+    align-items: center;
+    /* 수직 중앙 정렬 */
+    margin-bottom: 10px;
+}
+

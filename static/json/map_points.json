@@ -1,0 +1,68 @@
+{
+  "points": [
+    {
+      "map_id": 1,
+      "title": "서울",
+      "description": "본점",
+      "lat": 37.5665,
+      "lng": 126.9780,
+      "content": "서울 본점입니다."
+    },
+    {
+      "map_id": 5,
+      "title": "서울2",
+      "description": "서울2지점",
+      "lat": 37.5700,
+      "lng": 126.9820,
+      "content": "서울2지점입니다."
+    },
+    {
+      "map_id": 6,
+      "title": "서울3",
+      "description": "서울3지점",
+      "lat": 37.5610,
+      "lng": 126.9830,
+      "content": "서울3지점입니다."
+    },
+    {
+      "map_id": 7,
+      "title": "서울4",
+      "description": "서울4지점",
+      "lat": 37.5640,
+      "lng": 126.9750,
+      "content": "서울4지점입니다."
+    },
+    {
+      "map_id": 8,
+      "title": "인천",
+      "description": "인천지점",
+      "lat": 37.4563,
+      "lng": 126.7052,
+      "content": "인천지점입니다."
+    },
+    {
+      "map_id": 13,
+      "title": "수원",
+      "description": "수원지점",
+      "lat": 37.2636,
+      "lng": 127.0286,
+      "content": "수원지점입니다."
+    },
+    {
+      "map_id": 21,
+      "title": "서울 구로",
+      "description": "구로지점",
+      "lat": 37.4955,
+      "lng": 126.8875,
+      "content": "구로지점입니다."
+    },
+    {
+      "map_id": 22,
+      "title": "서울 마포",
+      "description": "마포지점",
+      "lat": 37.5638,
+      "lng": 126.9084,
+      "content": "서울 마포지점입니다."
+    }
+  ]
+}
