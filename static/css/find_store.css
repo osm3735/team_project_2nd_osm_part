@@ -1,7 +1,11 @@
+.container{
+    display:flex;
+    flex-direction: row;
+}
+
 #map {
     height: 700px;
     width: 70%;
-    margin-left: 600px;
-    margin-top: -200px;
+    margin-left: 10px;
     border: 1px solid #ccc;
 }

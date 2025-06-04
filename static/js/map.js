@@ -1,3 +1,8 @@
+const MAP_JSON_PATH = "../static/json/map_points.json";
+const CONFIG_JSON_PATH = "../static/json/config.json";
+
+let globalMap = null;
+
 function readTextFile(file, callback) {
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
@@ -10,10 +15,23 @@ function readTextFile(file, callback) {
     rawFile.send(null);
 }
 
-// 전역 변수로 map 인스턴스 저장
-let globalMap = null;
+function updateMapContentByHash(points) {
+    const hash = window.location.hash.replace('#', '');
+    const selected = points.find(p => String(p.map_id) === String(hash));
 
-readTextFile("../static/json/config.json", function (text) {
+    if (hash && selected) {
+        updateMapCenter(selected.lat, selected.lng, 16);
+    }
+}
+
+function updateMapCenter(lat, lng, zoom = 15) {
+    if (globalMap) {
+        globalMap.setCenter({ lat: lat, lng: lng });
+        globalMap.setZoom(zoom);
+    }
+}
+
+readTextFile(CONFIG_JSON_PATH, function (text) {
     var data_config = JSON.parse(text);
     const API_KEY = data_config.apiKey;
 
@@ -30,9 +48,29 @@ readTextFile("../static/json/config.json", function (text) {
             center: center
         });
 
-        readTextFile("../static/json/map_points.json", function (pointText) {
+        readTextFile(MAP_JSON_PATH, function (pointText) {
             const data = JSON.parse(pointText);
             const points = data.points;
+
+            document.getElementById('search-btn').addEventListener('click', function () {
+                const searchType = document.getElementById('search-type').value;
+                const keyword = document.getElementById('address-input').value.trim();
+                const resultBox = document.getElementById('search-results');
+
+                let filtered = [];
+
+                if (searchType === "1") {
+                    filtered = points.filter(p => p.title.includes(keyword));
+                } else if (searchType === "2") {
+                    filtered = points.filter(p => p.description.includes(keyword));
+                }
+
+                resultBox.innerHTML = filtered.length > 0
+                    ? filtered.map(p =>
+                        `<div>${p.title} - ${p.description}<button onclick="location.assign('find_store.html#${p.map_id}')">위치 찾기</button></div>`
+                    ).join('')
+                    : `<div>검색 결과가 없습니다.</div>`;
+            });
 
             const markers = points.map(p => {
                 const marker = new google.maps.Marker({
@@ -40,13 +78,13 @@ readTextFile("../static/json/config.json", function (text) {
                     title: p.title
                 });
 
-                // if (p.title || p.description) {
-                //     const info = new google.maps.InfoWindow({
-                //         content: `<strong><a href="#${p.map_id}">${p.title}</a></strong><br><hr>${p.description || ""}`
-                //     });
+                if (p.title || p.description) {
+                    const info = new google.maps.InfoWindow({
+                        content: `<strong><a href="#${p.map_id}">${p.title}</a></strong>`
+                    });
 
-                //     marker.addListener("click", () => info.open(globalMap, marker));
-                // }
+                    marker.addListener("click", () => info.open(globalMap, marker));
+                }
 
                 return marker;
             });
@@ -56,10 +94,30 @@ readTextFile("../static/json/config.json", function (text) {
     };
 });
 
-// 지도 중심 및 줌 업데이트 함수
-function updateMapCenter(lat, lng, zoom = 15) {
-    if (globalMap) {
-        globalMap.setCenter({ lat: lat, lng: lng });
-        globalMap.setZoom(zoom);
+
+window.addEventListener('hashchange', () => {
+    readTextFile(MAP_JSON_PATH, function (pointText) {
+        const data = JSON.parse(pointText);
+        updateMapContentByHash(data.points);
+    });
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash) {
+        readTextFile(MAP_JSON_PATH, function (pointText) {
+            const data = JSON.parse(pointText);
+            updateMapContentByHash(data.points);
+        });
     }
-}
+});
+
+window.addEventListener('load', () => {
+    if (window.location.hash) {
+        setTimeout(() => {
+            readTextFile(MAP_JSON_PATH, function (pointText) {
+                const data = JSON.parse(pointText);
+                updateMapContentByHash(data.points);
+            });
+        }, 1000); // 1초 후 재시도
+    }
+});
